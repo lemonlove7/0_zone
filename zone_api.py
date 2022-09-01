@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 import requests,re,json
-import os
+import os,sys
 import openpyxl
 import time
 from tqdm import tqdm
@@ -55,7 +55,7 @@ def zone_information(search,page,api):
         jp=json.loads(pp)
         if jp['code'] == 1:
             print('[-] '+jp['message'])
-            exit()
+            sys.exit()
         ips=extract_element_from_json(jp,["data","ip"])
         if ips==[None]:
             print('[+] 数据全部提取完毕提前结束')
@@ -90,7 +90,7 @@ def zone_email(search,page,api):
         jp = json.loads(pp)
         if jp['code']==1:
             print('[-] '+jp['message'])
-            exit()
+            sys.exit()
         emails=extract_element_from_json(jp,["data","email"])
         if emails==[None]:
             print('[+] 数据全部提取完毕提前结束')
@@ -114,7 +114,7 @@ def zone_apk(search,page,api):
         jp = json.loads(pp)
         if jp['code']==1:
             print('[-] '+jp['message'])
-            exit()
+            sys.exit()
         titles=extract_element_from_json(jp,["data","title"])
         if titles==[None]:
             print('[+] 数据全部提取完毕提前结束')
@@ -157,7 +157,7 @@ def zone_sd(search,page,api):
         jp = json.loads(pp)
         if jp['code']==1:
             print('[-] '+jp['message'])
-            exit()
+            sys.exit()
         urls = extract_element_from_json(jp, ["data", "url"])
         if urls == [None]:
             print('[+] 数据全部提取完毕提前结束')
@@ -184,7 +184,7 @@ def zone_code(search,page,api):
         jp = json.loads(pp)
         if jp['code']==1:
             print('[-] '+jp['message'])
-            exit()
+            sys.exit()
         code_urls = extract_element_from_json(jp, ["data", "code_url"])
         if code_urls == [None]:
             print('[+] 数据全部提取完毕提前结束')
@@ -213,7 +213,7 @@ def zone_member(search,page,api):
         jp = json.loads(pp)
         if jp['code']==1:
             print('[-] '+jp['message'])
-            exit()
+            sys.exit()
         names = extract_element_from_json(jp, ["data", "name"])
         if names == [None]:
             print('[+] 数据全部提取完毕提前结束')
@@ -315,7 +315,7 @@ if __name__ == '__main__':
         print('[-] 查询的类型:\n[+] 1:信息系统；2:移动端应用；3:敏感目录；4:邮箱；5:代码/文档；6:人员；7:退出')
         use=input('[-] 请输入数字(1-7):')
         if use =='7':
-            exit()
+            sys.exit()
         search=input('[-] 请输入要查询的语句:')
         sb_data = []
         if use=='1':
