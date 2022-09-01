@@ -296,6 +296,7 @@ def excl_sheel(use):
     print(f'[+] 写入完成,数据保存在{file_name}中')
 
 if __name__ == '__main__':
+    print('[+] author:lemonlove7\n[+] team:鹏组安全')
     config = configparser.ConfigParser()
     pwd = os.getcwd()
     if os.name == 'posix':
