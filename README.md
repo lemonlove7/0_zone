@@ -17,7 +17,14 @@ page=10
 获取的页数，10也就是10页，每页40条数据
 
 ## 运行zone_api.py
+### 安装需要的模块
+
+pip3 install -r requirements.txt
+
+### 运行
+
 python zone_api.py
+
 根据提示操作即可
 <img width="1114" alt="image" src="https://user-images.githubusercontent.com/56328995/187832697-8fa48c5c-edf0-44b5-a72f-6a879a768236.png">
 ### 数据文件保存在当前目录下
