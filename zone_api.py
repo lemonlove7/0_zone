@@ -307,24 +307,26 @@ if __name__ == '__main__':
     config.read(paths)
     page = config.get('default', 'page')
     page=int(page)+1
-    print('第二种方法读取到的值：', page)
     api= config.get('default', 'api')
 
     print('[-] 查询语法参考:https://0.zone/grammarList')
-    print('[-] 查询的类型:\n[+] 1:信息系统；2:移动端应用；3:敏感目录；4:邮箱；5:代码/文档；6:人员')
-    use=input('[-] 请输入数字(1-6):')
-    search=input('[-] 请输入要查询的语句:')
-    sb_data = []
-    if use=='1':
-        zone_information(search=search,page=page,api=api)
-    if use =='2':
-        zone_apk(search=search,page=page,api=api)
-    if use =='3':
-        zone_sd(search=search,page=page,api=api)
-    if use == '4':
-      zone_email(search=search,page=page,api=api)
-    if use =='5':
-        zone_code(search=search,page=page,api=api)
-    if use =='6':
-        zone_member(search=search,page=page,api=api)
-    excl_sheel(use=use)
+    while True:
+        print('[-] 查询的类型:\n[+] 1:信息系统；2:移动端应用；3:敏感目录；4:邮箱；5:代码/文档；6:人员；7:退出')
+        use=input('[-] 请输入数字(1-7):')
+        if use =='7':
+            exit()
+        search=input('[-] 请输入要查询的语句:')
+        sb_data = []
+        if use=='1':
+            zone_information(search=search,page=page,api=api)
+        if use =='2':
+            zone_apk(search=search,page=page,api=api)
+        if use =='3':
+            zone_sd(search=search,page=page,api=api)
+        if use == '4':
+          zone_email(search=search,page=page,api=api)
+        if use =='5':
+            zone_code(search=search,page=page,api=api)
+        if use =='6':
+            zone_member(search=search,page=page,api=api)
+        excl_sheel(use=use)
