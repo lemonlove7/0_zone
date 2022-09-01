@@ -227,8 +227,8 @@ def zone_member(search,page,api):
             p.append(str(sources[i]))
             sb_data.append(p)
 
-def excl_sheel(use):
-    path = r"/Users/lemonlove7/Documents/code/py/搜索引擎/零零信安/"
+def excl_sheel(use,pwd):
+    path = pwd
     os.chdir(path)
     workbook = openpyxl.Workbook()
     sheet = workbook.active
@@ -330,4 +330,4 @@ if __name__ == '__main__':
             zone_code(search=search,page=page,api=api)
         if use =='6':
             zone_member(search=search,page=page,api=api)
-        excl_sheel(use=use)
+        excl_sheel(use=use,pwd=pwd)
