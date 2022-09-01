@@ -72,8 +72,8 @@ def zone_information(search,page,api):
             p.append(str(urls[i]))
             p.append(str(titles[i]))
             p.append(str(status_codes[i]))
-            p.append(str(groups))
-            p.append(str(operators))
+            p.append(str(groups[i]))
+            p.append(str(operators[i]))
             p.append(str(CMS[i]))
             sb_data.append(p)
 
