@@ -30,3 +30,6 @@ python zone_api.py
 ### 数据文件保存在当前目录下
 <img width="528" alt="image" src="https://user-images.githubusercontent.com/56328995/187832791-c218baf3-0b7b-4432-904f-245e391652b6.png">
 <img width="842" alt="image" src="https://user-images.githubusercontent.com/56328995/187833405-79eb1d7d-4edf-43f8-85c6-b54e54de4d8c.png">
+
+## windows版本 v1.0
+https://github.com/lemonlove7/0_zone/releases/tag/v1.0
