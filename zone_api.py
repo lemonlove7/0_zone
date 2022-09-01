@@ -7,11 +7,6 @@ from tqdm import tqdm
 import configparser
 
 def extract_element_from_json(obj, path):
-    '''
-    输入关键字，就可以将关键字的值信息存放在列表中并输出
-    如果关键字是对象名，则返回的对象字典信息到列表中
-    如果关键字是列表名，则返回的列表信息到列表中（返回双重列表）
-    '''
     def extract(obj, path, ind, arr):
         key = path[ind]
         if ind + 1 < len(path):
@@ -49,12 +44,10 @@ def extract_element_from_json(obj, path):
         return outer_arr
 
 def zone_information(search,page,api):
-    # 信息系统
     information_url= 'https://0.zone/api/data/'
     print('[-] 开始提取数据')
     for pg in tqdm(range(1,int(page))):
         time.sleep(2)
-        #print(f'正在获取第{page}页')
         url_data={"title":f"{search}", "title_type":"site", "page":f"{str(pg)}", "pagesize":"40", "zone_key_id":f"{api}"}
 
         r= requests.post(url=information_url,data=url_data)
@@ -63,11 +56,7 @@ def zone_information(search,page,api):
         if jp['code'] == 1:
             print('[-] '+jp['message'])
             exit()
-        # ip = [ips.get('ip') for ips in jp.get('data') ]
-        # url=[urls.get('url') for urls in jp.get('data')]
-        #title=[titles.get('title') for titles in jp.get('title')]
         ips=extract_element_from_json(jp,["data","ip"])
-        #print(ips)
         if ips==[None]:
             print('[+] 数据全部提取完毕提前结束')
             break
@@ -77,7 +66,6 @@ def zone_information(search,page,api):
         groups=extract_element_from_json(jp,["data","group"])
         operators=extract_element_from_json(jp,["data","operator"])
         CMS=extract_element_from_json(jp,["data","cms"])
-        #print(ips,urls,titles)
         data_len=len(urls)
         for i in range(data_len):
             p = list(map(str,[ips[i]]))
@@ -88,14 +76,6 @@ def zone_information(search,page,api):
             p.append(str(operators))
             p.append(str(CMS[i]))
             sb_data.append(p)
-
-        #print(sb_data)
-
-
-        # aa=jp['data'][-1]['title']
-        # print(ip)
-        # print(url)
-        # print(aa)
 
 def zone_email(search,page,api):
     url = 'https://0.zone/api/data/'
@@ -131,20 +111,16 @@ def zone_apk(search,page,api):
                     "zone_key_id": f"{api}"}
         r = requests.post(url=url, data=url_data)
         pp=(r.content.decode('utf-8'))
-        #print(pp)
         jp = json.loads(pp)
-        #print(jp)
         if jp['code']==1:
             print('[-] '+jp['message'])
             exit()
         titles=extract_element_from_json(jp,["data","title"])
-        #print(titles)
         if titles==[None]:
             print('[+] 数据全部提取完毕提前结束')
             break
         sources=extract_element_from_json(jp,["data","source"])
         wechat_ids=[]
-        # print(wechat_ids)
         iconUrls=[]
         codes=[]
         groups=extract_element_from_json(jp,["data","group"])
@@ -171,7 +147,6 @@ def zone_apk(search,page,api):
             sb_data.append(p)
 
 def zone_sd(search,page,api):
-    #敏感目录
     url = 'https://0.zone/api/data/'
     for pg in tqdm(range(1,int(page))):
         time.sleep(2)
@@ -179,7 +154,6 @@ def zone_sd(search,page,api):
                     "zone_key_id": f"{api}"}
         r = requests.post(url=url, data=url_data)
         pp=(r.content.decode('utf-8'))
-        #print(pp)
         jp = json.loads(pp)
         if jp['code']==1:
             print('[-] '+jp['message'])
@@ -200,7 +174,6 @@ def zone_sd(search,page,api):
             sb_data.append(p)
 
 def zone_code(search,page,api):
-    #代码
     url = 'https://0.zone/api/data/'
     for pg in tqdm(range(1,int(page))):
         time.sleep(2)
@@ -208,19 +181,18 @@ def zone_code(search,page,api):
                     "zone_key_id": f"{api}"}
         r = requests.post(url=url, data=url_data)
         pp=(r.content.decode('utf-8'))
-        #print(pp)
         jp = json.loads(pp)
         if jp['code']==1:
             print('[-] '+jp['message'])
             exit()
-        code_urls = extract_element_from_json(jp, ["data", "code_url"]) #链接
+        code_urls = extract_element_from_json(jp, ["data", "code_url"])
         if code_urls == [None]:
             print('[+] 数据全部提取完毕提前结束')
             break
-        names=extract_element_from_json(jp,["data","name"]) #代码名称
-        keywords=extract_element_from_json(jp, ["data", "keyword"]) #匹配上的关键字
-        sources=extract_element_from_json(jp, ["data", "source"]) #代码来源
-        groups=extract_element_from_json(jp, ["data", "group"]) #所属公司
+        names=extract_element_from_json(jp,["data","name"])
+        keywords=extract_element_from_json(jp, ["data", "keyword"])
+        sources=extract_element_from_json(jp, ["data", "source"])
+        groups=extract_element_from_json(jp, ["data", "group"])
         data_len = len(code_urls)
         for i in range(data_len):
             p = list(map(str, [code_urls[i]]))
@@ -231,7 +203,6 @@ def zone_code(search,page,api):
             sb_data.append(p)
 
 def zone_member(search,page,api):
-    #人员
     url = 'https://0.zone/api/data/'
     for pg in tqdm(range(1,int(page))):
         time.sleep(2)
@@ -239,17 +210,16 @@ def zone_member(search,page,api):
                     "zone_key_id": f"{api}"}
         r = requests.post(url=url, data=url_data)
         pp=(r.content.decode('utf-8'))
-        #print(pp)
         jp = json.loads(pp)
         if jp['code']==1:
             print('[-] '+jp['message'])
             exit()
-        names = extract_element_from_json(jp, ["data", "name"]) #姓名
+        names = extract_element_from_json(jp, ["data", "name"])
         if names == [None]:
             print('[+] 数据全部提取完毕提前结束')
             break
-        groups=extract_element_from_json(jp, ["data", "group"]) #公司
-        sources=extract_element_from_json(jp, ["data", "source"])#来源
+        groups=extract_element_from_json(jp, ["data", "group"])
+        sources=extract_element_from_json(jp, ["data", "source"])
         data_len = len(names)
         for i in range(data_len):
             p = list(map(str, [names[i]]))
@@ -259,8 +229,7 @@ def zone_member(search,page,api):
 
 def excl_sheel(use):
     path = r"/Users/lemonlove7/Documents/code/py/搜索引擎/零零信安/"
-    os.chdir(path)  # 修改工作路径
-    # 创建表格  信息系统
+    os.chdir(path)
     workbook = openpyxl.Workbook()
     sheet = workbook.active
     timestr=''
@@ -282,13 +251,10 @@ def excl_sheel(use):
     if use =='6':
         sheet.title = '人员'
         timestr = '人员_' + time.strftime("%Y%m%d-%H%M%S")
-    #timestr = time.strftime("%Y%m%d-%H%M%S")
     file_name=timestr+'.xlsx'
-    #print(timestr)
     workbook.save(file_name)
-    # 修改单元格
-    workbook = openpyxl.load_workbook(file_name)  # 返回一个workbook数据类型的值
-    sheet = workbook.active  # 获取活动表
+    workbook = openpyxl.load_workbook(file_name)
+    sheet = workbook.active
     if use =='1':
         sheet['A1'] = 'ip'
         sheet['B1'] = 'url'
@@ -323,8 +289,6 @@ def excl_sheel(use):
         sheet['A1'] = '姓名'
         sheet['B1'] = '公司'
         sheet['C1'] = '来源'
-    # 插入有效数据
-    #print('当前活动表是：' + str(sheet))
     data=sb_data
     for row in data:
         sheet.append(row)
@@ -332,12 +296,10 @@ def excl_sheel(use):
     print(f'[+] 写入完成,数据保存在{file_name}中')
 
 if __name__ == '__main__':
-    config = configparser.ConfigParser()  # 类实例化
-    # 定义文件路径
+    config = configparser.ConfigParser()
     pwd = os.getcwd()
     if os.name == 'posix':
         path = '/config/config.ini'
-    # 定义文件路径
     if os.name == 'nt':
         path = '\\config\\config.ini'
     pwd = os.getcwd()
