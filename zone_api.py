@@ -48,7 +48,7 @@ def zone_information(search,page,api):
     print('[-] 开始提取数据')
     for pg in tqdm(range(1,int(page))):
         time.sleep(2)
-        url_data={"title":f"{search}", "title_type":"site", "page":f"{str(pg)}", "pagesize":"40", "zone_key_id":f"{api}"}
+        url_data={"query":f"{search}", "query_type":"site", "page":f"{str(pg)}", "pagesize":"40", "zone_key_id":f"{api}"}
 
         r= requests.post(url=information_url,data=url_data)
         pp=r.content.decode('utf-8')
@@ -82,7 +82,7 @@ def zone_email(search,page,api):
     print('[-] 开始提取数据')
     for pg in tqdm(range(1,int(page))):
         time.sleep(2)
-        url_data = {"title": f"{search}", "title_type": "email", "page": f"{str(pg)}", "pagesize": "40",
+        url_data = {"query": f"{search}", "query_type": "email", "page": f"{str(pg)}", "pagesize": "40",
                     "zone_key_id": f"{api}"}
 
         r = requests.post(url=url, data=url_data)
@@ -107,7 +107,7 @@ def zone_apk(search,page,api):
     url = 'https://0.zone/api/data/'
     for pg in tqdm(range(1,int(page))):
         time.sleep(2)
-        url_data = {"title": f"{search}", "title_type": "apk", "page": f"{str(pg)}", "pagesize": "40",
+        url_data = {"query": f"{search}", "query_type": "apk", "page": f"{str(pg)}", "pagesize": "40",
                     "zone_key_id": f"{api}"}
         r = requests.post(url=url, data=url_data)
         pp=(r.content.decode('utf-8'))
@@ -150,7 +150,7 @@ def zone_sd(search,page,api):
     url = 'https://0.zone/api/data/'
     for pg in tqdm(range(1,int(page))):
         time.sleep(2)
-        url_data = {"title": f"{search}", "title_type": "sensitive", "page": f"{str(pg)}", "pagesize": "40",
+        url_data = {"query": f"{search}", "query_type": "sensitive", "page": f"{str(pg)}", "pagesize": "40",
                     "zone_key_id": f"{api}"}
         r = requests.post(url=url, data=url_data)
         pp=(r.content.decode('utf-8'))
@@ -177,7 +177,7 @@ def zone_code(search,page,api):
     url = 'https://0.zone/api/data/'
     for pg in tqdm(range(1,int(page))):
         time.sleep(2)
-        url_data = {"title": f"{search}", "title_type": "code", "page": f"{str(pg)}", "pagesize": "40",
+        url_data = {"query": f"{search}", "query_type": "code", "page": f"{str(pg)}", "pagesize": "40",
                     "zone_key_id": f"{api}"}
         r = requests.post(url=url, data=url_data)
         pp=(r.content.decode('utf-8'))
@@ -206,7 +206,7 @@ def zone_member(search,page,api):
     url = 'https://0.zone/api/data/'
     for pg in tqdm(range(1,int(page))):
         time.sleep(2)
-        url_data = {"title": f"{search}", "title_type": "member", "page": f"{str(pg)}", "pagesize": "40",
+        url_data = {"query": f"{search}", "query_type": "member", "page": f"{str(pg)}", "pagesize": "40",
                     "zone_key_id": f"{api}"}
         r = requests.post(url=url, data=url_data)
         pp=(r.content.decode('utf-8'))
